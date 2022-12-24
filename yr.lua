@@ -119,4 +119,4 @@ modTab:Button(
 local zixun = main:Channel("资讯")
 
 zixun:Label("作者DX")
-zixun:Label("内测阶段已开启白名单")
+zixun:Label("测试阶段啊啥都没有")
