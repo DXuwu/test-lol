@@ -11,7 +11,7 @@ local Lib =
 
 
 
-local window = Lib:Window("DXgui | Discord Lib | 半完成 | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"))
+local window = Lib:Window("DXgui | Discord Lib | 完成 | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"))
 
 local doors = window:Server("主要","http://www.roblox.com/asset/?id=6031075938")
 
@@ -232,6 +232,14 @@ modTab:Button(
 	end
 )
 
+modTab:Button(
+	"极限模式(新怪物?)",
+	function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/DoorSuff/main/DoorsModes/HardMode(Multplayer%2CProtected).lua"))() 
+	end
+)
+
+modTab:Label("注意! 极限模式请在第一道门前使用")
 
 local char = doors:Channel("人物")
 char:Toggle(
@@ -366,7 +374,234 @@ entities:Button(
 end
 )
 
+entities:Button(
+	"Ambush",
+	function()
+		 local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
 
+-- Create entity
+local entity = Creator.createEntity({
+    CustomName = "Ambush", -- Custom name of your entity
+    Model = "https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Ambush.rbxm?raw=true", -- Can be GitHub file or rbxassetid --ignore
+    Speed = 200, -- Ambush Speed (100 is rush speed)
+    DelayTime = 2.8, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = false, --True = the entity can kill you
+    BreakLights = true, --True = the entity will break the lights once he reaches a room
+    FlickerLights = {
+        true, -- Enabled
+        1.1, -- How long the lights flicker for (in seconds)
+
+    },
+    Cycles = {
+        Min = 2, --Minimum Amount of Cycles
+        Max = 6, --Maximum Amount of Cycles
+        WaitTime = 2.2, --Time before starting another cycle (in seconds)
+    },
+    CamShake = {
+        true, -- Enabled
+        {5, 15, 0.1, 1}, -- Shake values (don't change if you don't know)
+        150, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        true, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://10483855823", -- Image1 url
+            Image2 = "rbxassetid://10483999903", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 255, 255), -- Color
+            },
+            Tease = {
+                true, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    CustomDialog = {"nice try fatty", "i got ya", "AH"}, -- Custom death message (can be as long as you want)
+})
+
+-----[[ Advanced ]]-----
+entity.Debug.OnEntitySpawned = function(entityModel)
+    print("Entity has spawned:", entityModel) 
+    wait(2.3)  --The thing that happens once the entity has spawned.
+    game.Workspace.Ambience_Ambush:Play()
+end
+
+entity.Debug.OnEntityDespawned = function(entityModel)
+    print("Entity has despawned:", mentityModelodel)  --The thing that happens once the entity has Despawned.
+end
+
+entity.Debug.OnEntityStartMoving = function(entityModel)
+    print("Entity has started moving:", entityModel)   --The thing that happens once the entity starts Moving.
+end
+
+entity.Debug.OnEntityFinishedRebound = function(entityModel)
+    print("Entity finished rebound:", entityModel) --Thing that happens when it finishes a rebound.
+end
+
+entity.Debug.OnDeath = function()
+    warn("You died.")  --Thing that happens when you die to the entity.
+end
+------------------------
+
+
+-- Ignore this (This makes the entity spawn)
+Creator.runEntity(entity) 
+
+end)
+
+entities:Button(
+	"Screech小黑子",
+	function()
+		require(game.StarterGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.Screech)(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+     
+end)
+
+entities:Button(
+	"Halt",
+	function()
+    	require(game.ReplicatedStorage.ClientModules.EntityModules.Shade).stuff(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+		workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+end)
+
+
+entities:Button(
+	"Seek",
+	function()
+		local EntitySpawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/EntitySpawner.lua"))()
+local Configuration = {}
+
+EntitySpawner:Spawn("Seek", unpack(Configuration))
+ 
+ end)
+
+entities:Button(
+	"Seek的小眼睛哈哈哈",
+	function()
+		require(game:GetService("ReplicatedStorage").ClientModules.EntityModules.Seek).tease(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game), workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")], 999)
+
+
+
+	end)
+	
+entities:Button(
+	"Glitchh̵̭̮̙̤̗́͗̾́̈́̽̀̀̚͝i̸̦͉̓̓̔̓̇̔̈́̌͆́̌͋͘",
+	function()
+		require(game.ReplicatedStorage.ClientModules.EntityModules.Glitch).stuff(require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game),
+    workspace.CurrentRooms[game.Players.LocalPlayer:GetAttribute("CurrentRoom")])
+   end)
+ 
+ entities:Button(
+ 	"Timothy小蜘蛛",
+ 	function()
+ 		local a = game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game
+require(a.RemoteListener.Modules.SpiderJumpscare)(require(a), workspace.CurrentRooms["0"].Assets.Dresser.DrawerContainer, 0.2)
+
+end)
+	
+entities:Button(
+	"A-60",
+	function()	
+	local Creator = loadstring(game:HttpGet("https://pastebin.com/raw/txV1ZG7S"))() 
+local entity = Creator.createEntity({
+    CustomName = "A-60", -- Custom name of your entity
+    Model = "rbxassetid:////11835351318", -- Can be GitHub file or rbxassetid
+    Speed = 700, -- Percentage, 100 = default Rush speed
+    DelayTime = 2, -- Time before starting cycles (seconds)
+    HeightOffset = 0,
+    CanKill = false,
+    KillRange = 40,
+    BreakLights = true,
+    BackwardsMovement = false,
+    FlickerLights = {
+        true, -- Enabled/Disabled
+        1, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 7,
+        Max = 7,
+        WaitTime = 1,
+    },
+    CamShake = {
+        true, -- Enabled/Disabled
+        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        true, -- Enabled/Disabled
+        {
+            Image1 = "rbxassetid://10483855823", -- Image1 url
+            Image2 = "rbxassetid://10483999903", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                10483790459, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Sound2 = {
+                10483837590, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled/Disabled
+                Color3.fromRGB(0, 0, 255), -- Color
+            },
+            Tease = {
+                true, -- Enabled/Disabled
+                Min = 4,
+                Max = 4,
+            },
+        },
+    },
+    CustomDialog = {"你死于A-60...", "等一下", "鸡"}, -- Custom death message
+    
+})
+
+-----[[ Advanced ]]-----
+entity.Debug.OnEntitySpawned = function(entityTable)
+    print("Entity has spawned:", entityTable.Model)
+end
+
+entity.Debug.OnEntityDespawned = function(entityTable)
+    print("Entity has despawned:", entityTable.Model)
+end
+
+entity.Debug.OnEntityStartMoving = function(entityTable)
+    print("Entity has started moving:", entityTable.Model)
+end
+
+entity.Debug.OnEntityFinishedRebound = function(entityTable)
+    print("Entity has finished rebound:", entityTable.Model)
+end
+
+entity.Debug.OnEntityEnteredRoom = function(entityTable, room)
+    print("Entity:", entityTable.Model, "has entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function(entityTable)
+    print("Player has looked at entity:", entityTable.Model)
+end
+
+entity.Debug.OnDeath = function(entityTable)
+    warn("Player has died.")
+end
+------------------------
+
+-- Run the created entity
+Creator.runEntity(entity)
+end
+)
 local others = doors:Channel("其他")
 
 others:Label("这里啥也没有哈哈哈哈")
@@ -379,4 +614,4 @@ local zixun = doors:Channel("资讯")
 
 zixun:Label("作者DX")
 zixun:Label("快手DXuwulol ")
-zixun:Label("半完成阶段")
+zixun:Label("快完成了?")
