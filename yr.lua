@@ -1,14 +1,21 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local RayfieldWindow = Rayfield:CreateWindow({
+	Name = "DX的DOORS gui【傻逼倒卖统统滚开】 | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"),
+	LoadingTitle = "正在加载",
+	LoadingSubtitle = "作者DX【Discord Ui Lib】"})
+Rayfield:Destroy()
 local Lib =
     loadstring(game:HttpGet "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/discord")()
 
 
 
 
-local window = Lib:Window("DXgui手机 | Discord Lib | 内测")
+local window = Lib:Window("DXgui | Discord Lib | 半完成 | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"))
 
-local main = window:Server("主要","http://www.roblox.com/asset/?id=6031075938")
+local doors = window:Server("主要","http://www.roblox.com/asset/?id=6031075938")
 
-local itemTab = main:Channel("物品")
+local itemTab = doors:Channel("物品")
 	
 itemTab:Button(
 	"十字架",
@@ -20,7 +27,7 @@ itemTab:Button(
 
 
 itemTab:Button(
-	"Seek十字架",
+	"Seek十字架 (手机崩溃)",
 	function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/RmdComunnityScriptsProvider/AngryHub/main/Seek%20Crucifix.lua"))()
 	end
@@ -41,6 +48,115 @@ itemTab:Button(
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/SernoxSergal/Sernox-s-Door-Gui/main/InfiniteFlashlight.lua"))()
 	end
 )
+
+itemTab:Button(
+	"M249!!!!(开火键鼠标左键)",
+	function()
+		-- Services
+
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+
+-- Variables
+
+local Plr = Players.LocalPlayer
+local Char = Plr.Character or Plr.CharacterAdded:Wait()
+local Hum = Char:WaitForChild("Humanoid")
+local RightArm = Char:WaitForChild("RightUpperArm")
+local LeftArm = Char:WaitForChild("LeftUpperArm")
+local RightHand = Char:WaitForChild("RightHand")
+local Mouse = Plr:GetMouse()
+
+local RightC1 = RightArm.RightShoulder.C1
+local LeftC1 = LeftArm.LeftShoulder.C1
+
+local SelfModules = {
+    Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))(),
+    CustomShop = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Shop%20Items/Source.lua"))(),
+}
+local ModuleScripts = {
+    MainGame = require(Plr.PlayerGui.MainUI.Initiator.Main_Game),
+}
+
+-- Functions
+
+-- Scripts
+
+local Gun = LoadCustomInstance("https://github.com/lopvi/Doors/blob/main/M249.rbxm?raw=true")
+
+if typeof(Gun) == "Instance" and Gun.ClassName == "Tool" then
+    Gun.Equipped:Connect(function()
+        RightArm.Name = "R_Arm"
+        LeftArm.Name = "L_Arm"
+        
+        local rightGrip = RightHand:WaitForChild("RightGrip")
+    
+        RightArm.RightShoulder.C1 = RightC1 * CFrame.Angles(math.rad(-90), math.rad(-35), 0)
+        LeftArm.LeftShoulder.C1 = LeftC1 * CFrame.new(1, 1, 0) * CFrame.Angles(math.rad(-80), math.rad(35), 0)
+        rightGrip.C1 = rightGrip.C1 * CFrame.Angles(0, math.rad(35), 0)
+    end)
+    
+    Gun.Unequipped:Connect(function()
+        RightArm.Name = "RightUpperArm"
+        LeftArm.Name = "LeftUpperArm"
+    
+        RightArm.RightShoulder.C1 = RightC1
+        LeftArm.LeftShoulder.C1 = LeftC1
+    end)
+    end
+    Gun.Activated:Connect(function()
+        while UIS.IsMouseButtonPressed(UIS, Enum.UserInputType.MouseButton1) and Char.FindFirstChild(Char, Gun.Name) and Hum.Health > 0 do
+            -- Sound
+            
+            local sound = Gun.Shoot:Clone()
+            sound.PlayOnRemove = true
+            sound.Parent = workspace
+            sound:Destroy()
+    
+            -- Shoot visual
+    
+            Gun.Barrel.Attachment.Particles:Emit(1)
+    
+            -- Cam shake
+    
+            ModuleScripts.MainGame.camShaker:ShakeOnce(20, 10, 0.05, 0.05)
+    
+            -- Bullet ray
+    
+            local bulletRay = Ray.new(Gun.Barrel.Position, (Mouse.Hit.Position - Gun.Barrel.Position).Unit * 100)
+            local found = workspace:FindPartOnRayWithIgnoreList(bulletRay, {Char})
+    
+            if found then
+                local entity = nil
+    
+                for _, v in next, workspace:GetChildren() do
+                    if v.GetAttribute(v, "IsCustomEntity") and found.IsDescendantOf(found, v) then
+                        entity = v
+    
+                        break
+                    end
+                end
+    
+                if entity then
+                    local health = entity:GetAttribute("Health") or 1
+                    health -= 1
+                    
+                    entity:SetAttribute("Health", health)
+    
+                    if health == 0 then
+                        entity:Destroy()
+                    end
+                end
+            end
+    
+            task.wait(0.1)
+        end
+    end)
+
+
+Gun.Parent = game.Players.LocalPlayer.Backpack
+	end
+)
 itemTab:Seperator()
 
 itemTab:Button(
@@ -51,7 +167,7 @@ itemTab:Button(
 )
 
 itemTab:Button(
-	"灯笼?",
+	"灯笼? (手机崩溃)",
 	function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/Nn4h2CCv"))()
 	end
@@ -72,7 +188,7 @@ itemTab:Button(
 )
 itemTab:Seperator()
 
-local modTab = main:Channel("游戏修改")
+local modTab = doors:Channel("游戏修改")
 	
 modTab:Button(
 	"MC房间",
@@ -116,7 +232,151 @@ modTab:Button(
 	end
 )
 
-local zixun = main:Channel("资讯")
+
+local char = doors:Channel("人物")
+char:Toggle(
+	"跳跃",
+	false,
+	function(val)
+		 if val==true then
+            con=game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+                if gameProcessed then return end
+                if input.KeyCode==Enum.KeyCode.Space then
+                    isJumping=true
+                    repeat 
+                        task.wait()
+                        if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid"):GetState()==Enum.HumanoidStateType.Freefall then else
+                        game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState(3) end
+                    until isJumping==false
+                end
+            end)
+
+            con2=game:GetService("UserInputService").InputEnded:Connect(function(input, gameProcessed)
+                if gameProcessed then return end
+                if input.KeyCode==Enum.KeyCode.Space then
+                    isJumping=false
+                end
+            end)
+        else con:Disconnect() con2:Disconnect() end
+    end
+)
+
+char:Button(
+	"第三人称",
+	function()
+		workspace.CurrentCamera:Destroy()
+			task.wait(.1)
+			workspace.CurrentCamera.CameraType = Enum.CameraType.Attach
+			workspace.CurrentCamera.CameraSubject = workspace[game.Players.LocalPlayer.Name].Head
+	end
+)
+
+local entities = doors:Channel("怪物生成")
+
+entities:Button(
+	"Rush",
+	function()
+		local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors%20Entity%20Spawner/Source.lua"))()
+
+        -- Create entity
+        local entity = Creator.createEntity({
+            CustomName = "Rush", -- Custom name of your entity
+            Model = "https://github.com/Johnny39871/assets/blob/main/Rush.rbxm?raw=true", -- Can be GitHub file or rbxassetid
+            Speed = 100, -- Percentage, 100 = default Rush speed
+            DelayTime = 2, -- Time before starting cycles (seconds)
+            HeightOffset = 0,
+            CanKill = false,
+            KillRange = 25,
+            BreakLights = true,
+            BackwardsMovement = false,
+            FlickerLights = {
+                true, -- Enabled/Disabled
+                1, -- Time (seconds)
+            },
+            Cycles = {
+                Min = 1,
+                Max = 1,
+                WaitTime = 2,
+            },
+            CamShake = {
+                true, -- Enabled/Disabled
+                {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+                100, -- Shake start distance (from Entity to you)
+            },
+            Jumpscare = {
+                true, -- Enabled/Disabled
+                {
+                    Image1 = "rbxassetid://10483855823", -- Image1 url
+                    Image2 = "rbxassetid://10483999903", -- Image2 url
+                    Shake = true,
+                    Sound1 = {
+                        10483790459, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Sound2 = {
+                        10483837590, -- SoundId
+                        { Volume = 0.5 }, -- Sound properties
+                    },
+                    Flashing = {
+                        true, -- Enabled/Disabled
+                        Color3.fromRGB(0, 0, 255), -- Color
+                    },
+                    Tease = {
+                        true, -- Enabled/Disabled
+                        Min = 4,
+                        Max = 4,
+                    },
+                },
+            },
+            CustomDialog = {"You died to Rush...", "your balls look dry", "Can I put some lotion on them?"}, -- Custom death message
+        })
+        
+        -----[[ Advanced ]]-----
+        entity.Debug.OnEntitySpawned = function(entityTable)
+            print("实体已生成:", entityTable.Model)
+        end
+        
+        entity.Debug.OnEntityDespawned = function(entityTable)
+            print("实体已消失:", entityTable.Model)
+        end
+        
+        entity.Debug.OnEntityStartMoving = function(entityTable)
+            print("实体开始移动:", entityTable.Model)
+        end
+        
+        entity.Debug.OnEntityFinishedRebound = function(entityTable)
+            print("实体已结束来回:", entityTable.Model)
+        end
+        
+        entity.Debug.OnEntityEnteredRoom = function(entityTable, room)
+            print("实体:", entityTable.Model, "已进入房间:", room)
+        end
+        
+        entity.Debug.OnLookAtEntity = function(entityTable)
+            print("玩家已看向实体:", entityTable.Model)
+        end
+        
+        entity.Debug.OnDeath = function(entityTable)
+            warn("玩家死亡.")
+        end
+        ------------------------
+        
+        -- Run the created entity
+        Creator.runEntity(entity)
+end
+)
+
+
+local others = doors:Channel("其他")
+
+others:Label("这里啥也没有哈哈哈哈")
+
+
+local zixun = doors:Channel("资讯")
+
+
+
 
 zixun:Label("作者DX")
-zixun:Label("测试阶段啊啥都没有")
+zixun:Label("快手DXuwulol ")
+zixun:Label("半完成阶段")
