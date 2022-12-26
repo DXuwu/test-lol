@@ -11,7 +11,7 @@ local Lib =
 
 
 
-local window = Lib:Window("DXgui | Discord Lib | 完成 | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"))
+local window = Lib:Window("DXgui | Discord Lib | 您所使用的执行器 ："..(identifyexecutor and identifyexecutor() or syn and "Synapse X" or "Unknown"))
 
 local doors = window:Server("主要","http://www.roblox.com/asset/?id=6031075938")
 
